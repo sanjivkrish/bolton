@@ -5,9 +5,5 @@
     "**/.*",
     "node_modules",
     "components"
-  ],
-  "dependencies": {
-    "annyang": "2.6.0",
-    "aframe": "^0.7.1"
-  }
+  ]
 }
