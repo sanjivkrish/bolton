@@ -16,4 +16,56 @@ window.onload =  function() {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
+  //
+  // Insert letter from the view
+  //
+  var insertLetter = function (letter, position) {
+    //
+    // Create <a-entity> element
+    //
+    var entity = document.createElement("a-entity");
+    entity.setAttribute('id', letter);
+    entity.setAttribute('position', position);
+
+    //
+    // Create <a-animation> element
+    //
+    var animation = document.createElement("a-animation");
+    animation.setAttribute('attribute', 'rotation');
+    animation.setAttribute('from', '0 -30 -3');
+    animation.setAttribute('to', '0 330 0');
+    animation.setAttribute('dur', '15000');
+    animation.setAttribute('easing', 'linear');
+    animation.setAttribute('repeat', 'indefinite');
+
+    //
+    // Create <a-image> element
+    //
+    var image = document.createElement("a-image");
+    image.setAttribute('src', 'img/' + letter + '.png');
+    image.setAttribute('scale', '0.5 0.5 0.5');
+
+    var scene = document.getElementById('scene');
+
+    entity.appendChild(animation);
+    entity.appendChild(image);
+
+    //
+    // Insert element into DOM
+    //
+    scene.insertBefore(entity, scene.childNodes[0]);
+  };
+
+  //
+  // Populate letters in the arena
+  //
+  for (var i = 0; i < lettersList.length; i++) {
+    var x = getRandomNumber(-4, 4);
+    var y = getRandomNumber(-4, 4);
+    var z = getRandomNumber(-4, 4);
+    var position = x + ' ' + y + ' ' + z;
+
+    insertLetter(lettersList[i], position);
+  }
+
 };
