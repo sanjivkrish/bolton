@@ -57,6 +57,14 @@ window.onload =  function() {
   };
 
   //
+  // Remove letter from the view
+  //
+  var removeLetter = function (letter) {
+    var elem = document.getElementById(letter);
+    elem.parentNode.removeChild(elem);
+  };
+
+  //
   // Populate letters in the arena
   //
   for (var i = 0; i < lettersList.length; i++) {
