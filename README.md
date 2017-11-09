@@ -1,13 +1,5 @@
 # _Bolton_
 
-##Tools used :
--	Backend     : NodeJS
--	Frontend    : AngularJS
--	API's       : Google places autocomplete API, Google maps API, Google direction API,
-	              Google geolocation API, Google user authentication API, Foursquare API
--	Generator   : Yoeman angular fullstack generator
--	Task runner : Grunt
-
 ##Requirements :
 - NodeJS      : v6.11.0
 - Git         : 1.9.5.msysgit.1
