@@ -60,8 +60,15 @@ window.onload =  function() {
   // Remove letter from the view
   //
   var removeLetter = function (letter) {
-    var elem = document.getElementById(letter);
-    elem.parentNode.removeChild(elem);
+    console.log("Voice input : " + letter);
+
+    var elem = document.getElementById(letter.toLowerCase());
+
+    if (elem !== null) {
+      elem.parentNode.removeChild(elem);
+    } else {
+      console.log("Could not detect the letter");
+    }
   };
 
   //
@@ -76,4 +83,15 @@ window.onload =  function() {
     insertLetter(lettersList[i], position);
   }
 
+  if (annyang) {
+  var commands = {
+    'letter *let': removeLetter
+  };
+
+  // Add our commands to annyang
+  annyang.addCommands(commands);
+
+  // Start listening. You can call this here, or attach this call to an event, button, etc.
+  annyang.start();
+}
 };
