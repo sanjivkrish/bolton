@@ -10,11 +10,11 @@ window.onload =  function() {
   //
   // Generate random number for position
   //
-  var getRandomNumber = function (min, max) {
+  /*var getRandomNumber = function (min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+  }*/
 
   //
   // Insert letter from the view
@@ -43,7 +43,9 @@ window.onload =  function() {
     //
     var image = document.createElement("a-image");
     image.setAttribute('src', 'img/' + letter + '.png');
-    image.setAttribute('scale', '0.5 0.5 0.5');
+    //image.setAttribute('scale', '0.5 0.5 0.5');
+    image.setAttribute('scale', '1.5 1.5 1.5');
+
 
     var scene = document.getElementById('scene');
 
@@ -74,14 +76,41 @@ window.onload =  function() {
   //
   // Populate letters in the arena
   //
-  for (var i = 0; i < lettersList.length; i++) {
+  /*for (var i = 0; i < lettersList.length; i++) {
     var x = getRandomNumber(-4, 4);
     var y = getRandomNumber(-4, 4);
     var z = getRandomNumber(-4, 4);
     var position = x + ' ' + y + ' ' + z;
 
     insertLetter(lettersList[i], position);
-  }
+  }*/
+   let numberOfLetters = lettersList.length;
+   let numberOfIterations = numberOfLetters * 50;
+   let increment = 0;
+   let positions = new Set();
+
+   do {
+     positions.add(generateRandomPosition())
+     increment ++;
+   } while(increment <= numberOfIterations);
+
+   function generateRandomPosition(){
+     let maxPositioning = numberOfLetters * 3;
+     let minPositioning = 20;
+     return Math.floor(Math.random()* maxPositioning)-minPositioning;
+   }
+
+   let uniquePositions = Array.from(positions);
+   let coords = [];
+   while(uniquePositions.length) coords.push(uniquePositions.splice(0,3));
+
+   coords.forEach((axis, index) => {
+     let position = axis[0] + ' ' + axis[1] + ' ' + axis[2];
+     insertLetter(lettersList[index], position);
+   });
+
+   //End of random positioning
+
 
   if (annyang) {
   var commands = {
