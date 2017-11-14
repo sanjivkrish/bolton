@@ -19,6 +19,13 @@ a-scene{
   margin-top      : 5%;
 }
 
+.dashboard {
+  position        : absolute;
+  justify-content : center;
+  left            : 2%;
+  bottom          : 4%;
+}
+
 .info {
 	font-family       : Arial;
   position          : absolute;
@@ -54,6 +61,11 @@ a-scene{
   background-color  : rgba(0, 0, 0, 0.1);
   padding           : 30px;
   margin            : 24px 0 0 0;
+}
+
+.dashboard .content {
+  background-color  : rgba(0,0,0,.35);
+  padding           : 20px;
 }
 
 @media (max-width: 600px) {
