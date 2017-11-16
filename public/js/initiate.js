@@ -101,6 +101,10 @@ window.onload =  function() {
     populateLetters();
   };
 
+  // Temperory function
+  var startBtn = document.getElementById('start');
+  startBtn.onclick = startGame;
+
   //
   // Receive voice input
   //
