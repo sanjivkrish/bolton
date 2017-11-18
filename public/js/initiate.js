@@ -15,7 +15,10 @@ window.onload =  function() {
     //
     var entity = document.createElement("a-entity");
     entity.setAttribute('id', letter);
-    entity.setAttribute('position', position);
+    entity.setAttribute('random-spherical-position', 0);
+    entity.setAttribute('random-position', 0);
+    entity.setAttribute('random-color', 0);
+    entity.setAttribute('annyang-voice-recognition');
 
     //
     // Create <a-animation> element
@@ -31,15 +34,16 @@ window.onload =  function() {
     //
     // Create <a-image> element
     //
-    var image = document.createElement("a-image");
-    image.setAttribute('src', 'img/' + letter + '.png');
-    image.setAttribute('scale', '1.5 1.5 1.5');
+    var image_box = document.createElement("a-box");
+    image_box.setAttribute('src', 'img/' + letter + '.png');
+    image_box.setAttribute('scale', '1.5 1.5 1.5');
+    // image_box.setAttribute('position', position);
 
 
     var scene = document.getElementById('scene');
 
     entity.appendChild(animation);
-    entity.appendChild(image);
+    entity.appendChild(image_box);
 
     //
     // Insert element into DOM
@@ -111,7 +115,7 @@ window.onload =  function() {
   if (annyang) {
     var commands = {
       'letter *let': removeLetter,
-      'startGame': startGame
+      'start the game': startGame
     };
 
     // Add our commands to annyang
