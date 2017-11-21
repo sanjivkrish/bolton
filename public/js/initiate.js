@@ -1,3 +1,8 @@
+import getScenerio from './entity_operation';
+import getPosition from './posistion';
+
+let scenerio = getScenerio();
+
 //
 // List of alphabets
 //
@@ -11,87 +16,14 @@ let numbersList = [
 ];
 
 //
-// Insert letter from the view
-//
-let insertLetter = function(letter, position) {
-    //
-    // Create <a-entity> element
-    //
-    let entity = document.createElement("a-entity");
-    let scene = document.getElementById('scene');
-
-    //
-    // Create <a-animation> element
-    //
-    let animation = document.createElement("a-animation");
-
-    //
-    // Create <a-image> element
-    //
-    let image = document.createElement("a-image");
-
-    entity.setAttribute('id', letter);
-    entity.setAttribute('position', position);
-
-    animation.setAttribute('attribute', 'rotation');
-    animation.setAttribute('from', '0 -30 -3');
-    animation.setAttribute('to', '0 330 0');
-    animation.setAttribute('dur', '15000');
-    animation.setAttribute('easing', 'linear');
-    animation.setAttribute('repeat', 'indefinite');
-
-    image.setAttribute('src', 'img/f1/' + letter + '.png');
-    image.setAttribute('scale', '0.25 0.25 0.25');
-
-
-    entity.appendChild(animation);
-    entity.appendChild(image);
-
-    //
-    // Insert element into DOM
-    //
-    scene.insertBefore(entity, scene.childNodes[0]);
-};
-
-//
-// Remove letter from the view
-//
-let removeLetter = function(letter) {
-    console.log("Voice input : " + letter);
-
-    let elem = document.getElementById(letter.toLowerCase());
-
-    if (elem !== null) {
-        elem.parentNode.removeChild(elem);
-    } else {
-        console.log("Could not detect the letter");
-    }
-};
-
-let generateRandomPosition = function(number) {
-    let entriesPerSide = number / 4;
-    let positionList = [];
-
-    for (var i = 0; i < number; i++) {
-        positionList[i] = [];
-
-        positionList[i][0] = Math.floor(Math.random() * (7)) - 3;
-        positionList[i][1] = Math.floor(Math.random() * (7)) - 3;
-        positionList[i][2] = Math.floor(Math.random() * (7)) - 3;
-    }
-
-    return positionList;
-};
-
-//
 // Populate letters in the arena
 //
 let populateLetters = function() {
     let entityList = lettersList.concat(numbersList);
-    let positionList = generateRandomPosition(entityList.length);
+    let positionList = getPosition(entityList.length);
 
     entityList.forEach(function(entity, index) {
-        insertLetter(entity, positionList[index].join(' '));
+        scenerio.insertLetter(entity, positionList[index].join(' '));
     });
 
 };
@@ -115,8 +47,8 @@ window.onload = function() {
     //
     if (annyang) {
         let commands = {
-            'letter *let': removeLetter,
-            'startGame': startGame
+            'letter *let': scenerio.removeLetter,
+            'start game': startGame
         };
 
         // Add our commands to annyang
