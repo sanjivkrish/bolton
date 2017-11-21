@@ -1,26 +1,38 @@
-
 //
 // List of alphabets
 //
-var lettersList = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-                  'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+let lettersList = [
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+    'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+];
 
-window.onload =  function() {
-  //
-  // Insert letter from the view
-  //
-  var insertLetter = function (letter, position) {
+let numbersList = [
+    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'
+];
+
+//
+// Insert letter from the view
+//
+let insertLetter = function(letter, position) {
     //
     // Create <a-entity> element
     //
-    var entity = document.createElement("a-entity");
-    entity.setAttribute('id', letter);
-    entity.setAttribute('position', position);
+    let entity = document.createElement("a-entity");
+    let scene = document.getElementById('scene');
 
     //
     // Create <a-animation> element
     //
-    var animation = document.createElement("a-animation");
+    let animation = document.createElement("a-animation");
+
+    //
+    // Create <a-image> element
+    //
+    let image = document.createElement("a-image");
+
+    entity.setAttribute('id', letter);
+    entity.setAttribute('position', position);
+
     animation.setAttribute('attribute', 'rotation');
     animation.setAttribute('from', '0 -30 -3');
     animation.setAttribute('to', '0 330 0');
@@ -28,15 +40,9 @@ window.onload =  function() {
     animation.setAttribute('easing', 'linear');
     animation.setAttribute('repeat', 'indefinite');
 
-    //
-    // Create <a-image> element
-    //
-    var image = document.createElement("a-image");
-    image.setAttribute('src', 'img/' + letter + '.png');
-    image.setAttribute('scale', '1.5 1.5 1.5');
+    image.setAttribute('src', 'img/f1/' + letter + '.png');
+    image.setAttribute('scale', '0.25 0.25 0.25');
 
-
-    var scene = document.getElementById('scene');
 
     entity.appendChild(animation);
     entity.appendChild(image);
@@ -45,79 +51,78 @@ window.onload =  function() {
     // Insert element into DOM
     //
     scene.insertBefore(entity, scene.childNodes[0]);
-  };
+};
 
-  //
-  // Remove letter from the view
-  //
-  var removeLetter = function (letter) {
+//
+// Remove letter from the view
+//
+let removeLetter = function(letter) {
     console.log("Voice input : " + letter);
 
-    var elem = document.getElementById(letter.toLowerCase());
+    let elem = document.getElementById(letter.toLowerCase());
 
     if (elem !== null) {
-      elem.parentNode.removeChild(elem);
+        elem.parentNode.removeChild(elem);
     } else {
-      console.log("Could not detect the letter");
+        console.log("Could not detect the letter");
     }
-  };
+};
 
-  //
-  // Populate letters in the arena
-  //
-  var populateLetters = function () {
-    let numberOfLetters = lettersList.length;
-    let numberOfIterations = numberOfLetters * 50;
-    let increment = 0;
-    let positions = new Set();
+let generateRandomPosition = function(number) {
+    let entriesPerSide = number / 4;
+    let positionList = [];
 
-    do {
-      positions.add(generateRandomPosition())
-      increment ++;
-    } while(increment <= numberOfIterations);
+    for (var i = 0; i < number; i++) {
+        positionList[i] = [];
 
-    function generateRandomPosition(){
-      let maxPositioning = numberOfLetters * 3;
-      let minPositioning = 20;
-      return Math.floor(Math.random()* maxPositioning)-minPositioning;
+        positionList[i][0] = Math.floor(Math.random() * (7)) - 3;
+        positionList[i][1] = Math.floor(Math.random() * (7)) - 3;
+        positionList[i][2] = Math.floor(Math.random() * (7)) - 3;
     }
 
-    let uniquePositions = Array.from(positions);
-    let coords = [];
-    while(uniquePositions.length) coords.push(uniquePositions.splice(0,3));
+    return positionList;
+};
 
-    coords.forEach((axis, index) => {
-      let position = axis[0] + ' ' + axis[1] + ' ' + axis[2];
-      insertLetter(lettersList[index], position);
+//
+// Populate letters in the arena
+//
+let populateLetters = function() {
+    let entityList = lettersList.concat(numbersList);
+    let positionList = generateRandomPosition(entityList.length);
+
+    entityList.forEach(function(entity, index) {
+        insertLetter(entity, positionList[index].join(' '));
     });
-  };
 
-  //
-  // Begin game
-  //
-  var startGame = function () {
+};
+
+//
+// Begin game
+//
+let startGame = function() {
     document.getElementById('container').outerHTML = '';
     document.getElementsByTagName('a-scene')[0].style.zIndex = 'auto';
     populateLetters();
-  };
+};
 
-  // Temperory function
-  var startBtn = document.getElementById('start');
-  startBtn.onclick = startGame;
+window.onload = function() {
+    // Temperory function
+    let startBtn = document.getElementById('start');
+    startBtn.onclick = startGame;
 
-  //
-  // Receive voice input
-  //
-  if (annyang) {
-    var commands = {
-      'letter *let': removeLetter,
-      'startGame': startGame
-    };
+    //
+    // Receive voice input
+    //
+    if (annyang) {
+        let commands = {
+            'letter *let': removeLetter,
+            'startGame': startGame
+        };
 
-    // Add our commands to annyang
-    annyang.addCommands(commands);
+        // Add our commands to annyang
+        annyang.addCommands(commands);
 
-    // Start listening. You can call this here, or attach this call to an event, button, etc.
-    annyang.start();
-  }
+        // Start listening. You can call this here, or attach this call to an event, button, etc.
+        annyang.start();
+    }
 };
