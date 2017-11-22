@@ -1,9 +1,17 @@
 let scenerio = {};
 
 //
+// Select where to pick letters
+//
+let selecteImgFamily = function() {
+    return Math.floor(Math.random() * (14)) + 1;
+};
+
+//
 // Insert letter from the view
 //
 scenerio.insertLetter = function(letter, position) {
+
     //
     // Create <a-entity> element
     //
@@ -30,7 +38,7 @@ scenerio.insertLetter = function(letter, position) {
     animation.setAttribute('easing', 'linear');
     animation.setAttribute('repeat', 'indefinite');
 
-    image.setAttribute('src', 'img/f1/' + letter + '.png');
+    image.setAttribute('src', 'img/f' + selecteImgFamily() + '/' + letter + '.png');
     image.setAttribute('scale', '0.25 0.25 0.25');
 
 
@@ -52,6 +60,7 @@ scenerio.removeLetter = function(letter) {
     let elem = document.getElementById(letter.toLowerCase());
 
     if (elem !== null) {
+        document.getElementById('explosion').components.sound.playSound();
         elem.parentNode.removeChild(elem);
     } else {
         console.log("Could not detect the letter");
