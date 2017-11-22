@@ -54,7 +54,9 @@ window.onload = function() {
         // Add our commands to annyang
         annyang.addCommands(commands);
 
+        annyang.setLanguage('en-IN');
+
         // Start listening. You can call this here, or attach this call to an event, button, etc.
-        annyang.start();
+        annyang.start({ autoRestart: true, continuous: false });
     }
 };
