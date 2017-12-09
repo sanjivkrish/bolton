@@ -12,7 +12,7 @@ let lettersList = [
 ];
 
 let numbersList = [
-    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'
+    'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'zero'
 ];
 
 //
@@ -48,6 +48,7 @@ window.onload = function() {
     if (annyang) {
         let commands = {
             'letter *let': scenerio.removeLetter,
+            'number *num': scenerio.removeNumber,
             'start game': startGame
         };
 

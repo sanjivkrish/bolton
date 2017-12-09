@@ -1,10 +1,16 @@
+import getValidator from './input_validator';
+import getScoreInfo from './score';
+
+let validator = getValidator();
+let scoreInfo = getScoreInfo();
+
 let scenerio = {};
 
 //
 // Select where to pick letters
 //
 let selecteImgFamily = function() {
-    return Math.floor(Math.random() * (14)) + 1;
+    return Math.floor(Math.random() * (4)) + 1;
 };
 
 //
@@ -62,8 +68,30 @@ scenerio.removeLetter = function(letter) {
     if (elem !== null) {
         document.getElementById('explosion').components.sound.playSound();
         elem.parentNode.removeChild(elem);
+        scoreInfo.incScore(1);
     } else {
         console.log("Could not detect the letter");
+    }
+};
+
+//
+// Remove number from the view
+//
+scenerio.removeNumber = function(number) {
+    console.log("Voice input : " + number);
+
+    if (number.length == 1) {
+        number = validator.numToStr(number);
+    }
+
+    let elem = document.getElementById(number.toLowerCase());
+
+    if (elem !== null) {
+        document.getElementById('explosion').components.sound.playSound();
+        elem.parentNode.removeChild(elem);
+        scoreInfo.incScore(1);
+    } else {
+        console.log("Could not detect the number");
     }
 };
 
