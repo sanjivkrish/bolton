@@ -37,7 +37,23 @@ let startGame = function() {
     populateLetters();
 };
 
+//
+// Choose random background image
+//
+let chooseBgImg = function() {
+    let scene = document.getElementById('scene');
+    let sky = document.createElement("a-sky");
+
+    sky.setAttribute('src', 'img/bg/' + (Math.floor(Math.random() * (6)) + 1) + '.jpg');
+    sky.setAttribute('rotation', '0 -130 0');
+
+    scene.appendChild(sky);
+};
+
 window.onload = function() {
+    // Choose random Background image
+    chooseBgImg();
+
     // Temperory function
     let startBtn = document.getElementById('start');
     startBtn.onclick = startGame;
