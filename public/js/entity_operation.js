@@ -5,12 +5,18 @@ let validator = getValidator();
 let scoreInfo = getScoreInfo();
 
 let scenerio = {};
+let imageFamily = null;
 
 //
 // Select where to pick letters
 //
 let selecteImgFamily = function() {
-    return Math.floor(Math.random() * (4)) + 1;
+    if (imageFamily !== null) {
+        return imageFamily;
+    }
+
+    imageFamily = Math.floor(Math.random() * (3)) + 1;
+    return imageFamily;
 };
 
 //
