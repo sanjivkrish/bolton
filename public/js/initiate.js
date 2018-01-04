@@ -15,12 +15,17 @@ let numbersList = [
     'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'zero'
 ];
 
+let questionList = [
+    'orange', 'beautiful', 'tiger', 'superman', 'country', 'play', 'cake'
+];
+
 //
 // Populate letters in the arena
 //
 let populateLetters = function() {
     let entityList = lettersList.concat(numbersList);
     let positionList = getPosition(entityList.length);
+    let scene = document.getElementById('scene');
 
     entityList.forEach(function(entity, index) {
         scenerio.insertLetter(entity, positionList[index].join(' '));
@@ -29,12 +34,32 @@ let populateLetters = function() {
 };
 
 //
+// Populate Question in the arena
+//
+let insertQuestion = function() {
+    let selectedQuestionPos = Math.floor(Math.random() * (questionList.length));
+    let selectedQuestion = questionList[selectedQuestionPos];
+
+    document.getElementById('QuesFound').innerHTML = '';
+    document.getElementById('QuesPending').innerHTML = selectedQuestion.toLowerCase();
+};
+
+//
 // Begin game
 //
 let startGame = function() {
-    document.getElementById('container').outerHTML = '';
+    document.getElementById('container').style.zIndex = -1;
     document.getElementsByTagName('a-scene')[0].style.zIndex = 'auto';
     populateLetters();
+};
+
+//
+// Go to level 2
+//
+let startlevel2 = function() {
+    document.getElementById('question').style.zIndex = 'auto';
+    insertQuestion();
+    startGame();
 };
 
 //
@@ -44,7 +69,7 @@ let chooseBgImg = function() {
     let scene = document.getElementById('scene');
     let sky = document.createElement("a-sky");
 
-    sky.setAttribute('src', 'img/bg/' + (Math.floor(Math.random() * (6)) + 1) + '.jpg');
+    sky.setAttribute('src', 'img/bg/' + (Math.floor(Math.random() * (3)) + 1) + '.jpg');
     sky.setAttribute('rotation', '0 -130 0');
 
     scene.appendChild(sky);
@@ -57,6 +82,14 @@ window.onload = function() {
     // Temperory function
     let startBtn = document.getElementById('start');
     startBtn.onclick = startGame;
+
+    // Level1
+    let level1Btn = document.getElementById('level1');
+    level1Btn.onclick = startGame;
+
+    // Level2
+    let level2Btn = document.getElementById('level2');
+    level2Btn.onclick = startlevel2;
 
     //
     // Receive voice input

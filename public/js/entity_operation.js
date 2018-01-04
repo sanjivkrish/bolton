@@ -67,6 +67,28 @@ scenerio.insertLetter = function(letter, position) {
 // Remove letter from the view
 //
 scenerio.removeLetter = function(letter) {
+    let QuesFound = document.getElementById('QuesFound').innerHTML;
+    let QuesPending = document.getElementById('QuesPending').innerHTML;
+    let letToBeFound = null;
+
+    if (QuesPending != null) {
+        letToBeFound = QuesPending[0];
+
+        if (letToBeFound !== letter.toLowerCase()) {
+            console.log("Could not detect the letter");
+            return;
+        } else {
+            document.getElementById('QuesPending').innerHTML = QuesPending.slice(1);
+            document.getElementById('QuesFound').innerHTML = QuesFound + letToBeFound;
+            if ((document.getElementById('QuesPending').innerHTML === '') || (QuesPending.length === 0)) {
+                letToBeFound = null;
+                setTimeout(function() {
+                    document.getElementById('level2').click();
+                }, 1000)
+            }
+        }
+    }
+
     console.log("Voice input : " + letter);
 
     let elem = document.getElementById(letter.toLowerCase());
@@ -74,7 +96,10 @@ scenerio.removeLetter = function(letter) {
     if (elem !== null) {
         document.getElementById('explosion').components.sound.playSound();
         elem.parentNode.removeChild(elem);
-        scoreInfo.incScore(1);
+
+        if (letToBeFound === null) {
+            scoreInfo.incScore(1);
+        }
     } else {
         console.log("Could not detect the letter");
     }
