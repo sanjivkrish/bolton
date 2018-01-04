@@ -54,7 +54,7 @@ a-scene {
     font-weight: bold;
     background-color: #32cdb8;
     padding: 10px;
-    margin: 24px 0 0 0;
+    margin: 16px 0 0 0;
 }
 
 .info .instructions {
@@ -69,9 +69,38 @@ a-scene {
 }
 
 .dashboard .content strong {
-    color: white;
+    color: lime;
     font-weight: 900;
     font-family: sans-serif;
+}
+
+.question {
+    position: absolute;
+    justify-content: center;
+    left: 45%;
+    bottom: 4%;
+}
+
+.question .content {
+    background-color: rgba(0, 0, 0, .35);
+    padding: 20px;
+}
+
+.question .content strong {
+    color: lime;
+    font-weight: 900;
+    font-size: 1.5em;
+    font-family: sans-serif;
+}
+
+#question {
+    z-index: -2;
+}
+
+#QuesFound {
+    color: yellow;
+    font-size: 1.5em;
+    text-transform: uppercase;
 }
 
 @media (max-width: 600px) {
