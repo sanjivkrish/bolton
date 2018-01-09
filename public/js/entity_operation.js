@@ -67,11 +67,13 @@ scenerio.insertLetter = function(letter, position) {
 // Remove letter from the view
 //
 scenerio.removeLetter = function(letter) {
+    console.log(new Date().getTime());
     let QuesFound = document.getElementById('QuesFound').innerHTML;
     let QuesPending = document.getElementById('QuesPending').innerHTML;
+    let question = document.getElementById('question');
     let letToBeFound = null;
 
-    if (QuesPending != null) {
+    if (question.style.zIndex==-2 && QuesPending != null) {
         letToBeFound = QuesPending[0];
 
         if (letToBeFound !== letter.toLowerCase()) {
@@ -96,6 +98,8 @@ scenerio.removeLetter = function(letter) {
     if (elem !== null) {
         document.getElementById('explosion').components.sound.playSound();
         elem.parentNode.removeChild(elem);
+
+        console.log(new Date().getTime());
 
         if (letToBeFound === null) {
             scoreInfo.incScore(1);
