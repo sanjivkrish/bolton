@@ -1,16 +1,25 @@
-//
-// Return posistion array
-//
-export default function getPosition(number) {
-    let positionList = [];
+/** @module position */
+let positions = [];
 
-    for (var i = 0; i < number; i++) {
-        positionList[i] = [];
+/** get positions for x, y, z coordinates */
+function getPositions (nPos) {
 
-        positionList[i][0] = Math.floor(Math.random() * (7)) - 3;
-        positionList[i][1] = Math.floor(Math.random() * (4));
-        positionList[i][2] = Math.floor(Math.random() * (7)) - 3;
-    }
-
-    return positionList;
 }
+
+function uniquePosition () {
+
+}
+
+function getX () {
+	return Math.floor(Math.random() * (7)) - 3;
+}
+
+function getY () {
+	return Math.floor(Math.random() * (7)) - 3;
+}
+
+function getZ () {
+	return Math.floor(Math.random() * (4));
+}
+
+module.exports.getPositions = getPositions;
