@@ -21,9 +21,15 @@ function getPositions (positions, index) {
 }
 
 function uniquePosition (positions, index, x, y, z) {
-	let isUnique = !(positions[index][0] === x && positions[index][1] === y && positions[index][2] === z);
-	console.log(isUnique);
-	return isUnique;
+	let len = positions.length;
+
+	var hash = {};
+
+	for (var i = 0; i < len; i++) {
+		hash[positions[i]] = i;
+	}
+
+	return !hash.hasOwnProperty([x, y, z]);
 }
 
 function getX () {
@@ -31,11 +37,11 @@ function getX () {
 }
 
 function getY () {
-	return Math.floor(Math.random() * (7)) - 2;
+	return Math.floor(Math.random() * (4));
 }
 
 function getZ () {
-	return Math.floor(Math.random() * (4));
+	return Math.floor(Math.random() * (7)) - 2;
 }
 
 export default getPositions;

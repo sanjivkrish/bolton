@@ -28,6 +28,7 @@ let populateLetters = function() {
     entityList.forEach((item, index) => {
         positionList[index] = getPosition(positionList, index);
     });
+
     let scene = document.getElementById('scene');
 
     entityList.forEach(function(entity, index) {
