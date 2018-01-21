@@ -27,7 +27,7 @@ a-scene {
 }
 
 .info {
-    font-family: Arial;
+    font-family: Courier New;
     position: absolute;
     background-color: #ffffffc9;
     padding: 30px;
@@ -52,13 +52,13 @@ a-scene {
 
 .info .start {
     font-weight: bold;
-    background-color: #32cdb8;
+    background-color: rgb(180, 180, 180);
     padding: 10px;
     margin: 16px 0 0 0;
 }
 
 .info .instructions {
-    background-color: rgba(0, 0, 0, 0.25);
+    background-color: rgb(180, 180, 180);
     padding: 30px;
     margin: 24px 0 0 0;
 }
@@ -69,7 +69,7 @@ a-scene {
 }
 
 .dashboard .content strong {
-    color: lime;
+    color: rgb(255, 0, 0);
     font-weight: 900;
     font-family: sans-serif;
 }
@@ -87,7 +87,7 @@ a-scene {
 }
 
 .question .content strong {
-    color: lime;
+    color: rgb(114, 255, 255);
     font-weight: 900;
     font-size: 1.5em;
     font-family: sans-serif;

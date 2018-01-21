@@ -24,7 +24,11 @@ let questionList = [
 //
 let populateLetters = function() {
     let entityList = lettersList.concat(numbersList);
-    let positionList = getPosition(entityList.length);
+    let positionList = [];
+    entityList.forEach((item, index) => {
+        positionList[index] = getPosition(positionList, index);
+    });
+
     let scene = document.getElementById('scene');
 
     entityList.forEach(function(entity, index) {
