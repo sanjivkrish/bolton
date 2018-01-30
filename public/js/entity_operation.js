@@ -73,11 +73,11 @@ scenerio.removeLetter = function(letter) {
     let question = document.getElementById('question');
     let letToBeFound = null;
 
-    if (question.style.zIndex==-2 && QuesPending != null) {
+    if (question.style.zIndex=='auto' && QuesPending != null) {
         letToBeFound = QuesPending[0];
 
         if (letToBeFound !== letter.toLowerCase()) {
-            console.log("Could not detect the letter");
+            console.log("Wrong input " + letter);
             return;
         } else {
             document.getElementById('QuesPending').innerHTML = QuesPending.slice(1);
@@ -117,6 +117,29 @@ scenerio.removeNumber = function(number) {
 
     if (number.length == 1) {
         number = validator.numToStr(number);
+    }
+
+    let QuesFound = document.getElementById('QuesFound').innerHTML;
+    let QuesPending = document.getElementById('QuesPending').innerHTML;
+    let question = document.getElementById('question');
+    let letToBeFound = null;
+
+    if (question.style.zIndex=='auto' && QuesPending != null) {
+        letToBeFound = QuesPending[0];
+
+        if (letToBeFound != number) {
+            console.log("Wrong input " + number);
+            return;
+        } else {
+            document.getElementById('QuesPending').innerHTML = QuesPending.slice(1);
+            document.getElementById('QuesFound').innerHTML = QuesFound + letToBeFound;
+            if ((document.getElementById('QuesPending').innerHTML === '') || (QuesPending.length === 0)) {
+                letToBeFound = null;
+                setTimeout(function() {
+                    document.getElementById('level2').click();
+                }, 1000)
+            }
+        }
     }
 
     let elem = document.getElementById(number.toLowerCase());
