@@ -25,6 +25,13 @@ let populateLetters = function() {
     let entityList = lettersList.concat(numbersList);
     let positionList = [];
     entityList.forEach((item, index) => {
+        let elem = document.getElementById(item);
+
+        // Clear all UI elements
+        if (elem !== null) {
+            elem.parentNode.removeChild(elem);
+        }
+
         positionList[index] = getPosition(positionList, index);
     });
 
