@@ -126,6 +126,8 @@ window.onload = function() {
         let commands = {
             'letter *let': scenerio.removeLetter,
             'number *num': scenerio.removeNumber,
+            'Level one': startGame,
+            'Level two': startlevel2,
             'start game': startGame
         };
 
