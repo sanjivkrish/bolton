@@ -15,9 +15,8 @@ let numbersList = [
     'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'zero'
 ];
 
-let questionList = [
-    'orange', 'beautiful', 'tiger', 'superman', 'country', 'play', 'cake'
-];
+// Custome made endpoint to fetch question from GSHEET
+let queEndpoint = 'https://bolton-wort.herokuapp.com/words/';
 
 //
 // Populate letters in the arena
@@ -37,15 +36,40 @@ let populateLetters = function() {
 
 };
 
+// Make Async HTTp req
+let  httpGetAsync = function (theUrl, callback) {
+    var xmlHttp = new XMLHttpRequest();
+
+    xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("GET", theUrl, true);
+
+    xmlHttp.send(null);
+};
+
 //
 // Populate Question in the arena
 //
 let insertQuestion = function() {
-    let selectedQuestionPos = Math.floor(Math.random() * (questionList.length));
-    let selectedQuestion = questionList[selectedQuestionPos];
+    // Set question
+    // document.getElementById('QuesFound').innerHTML = '';
+    // document.getElementById('QuesPending').innerHTML = 'sample';
 
-    document.getElementById('QuesFound').innerHTML = '';
-    document.getElementById('QuesPending').innerHTML = selectedQuestion.toLowerCase();
+    // Make HTTP request to REST api
+    httpGetAsync(queEndpoint, function (res) {
+        let quesArray = JSON.parse(res);
+        let selectedQuestionPos = Math.floor(Math.random() * (quesArray.length));
+        let selectedQuestion = quesArray[selectedQuestionPos];
+
+        // Set question
+        document.getElementById('QuesFound').innerHTML = '';
+        document.getElementById('QuesPending').innerHTML = selectedQuestion.toLowerCase();
+
+        // Start generating letters in the UI
+        // startGame();
+    });
 };
 
 //
@@ -62,7 +86,7 @@ let startGame = function() {
 //
 let startlevel2 = function() {
     document.getElementById('question').style.zIndex = 'auto';
-    insertQuestion();
+    insertQuestion(queEndpoint);
     startGame();
 };
 
