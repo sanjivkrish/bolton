@@ -17,28 +17,30 @@ a-scene {
     display: flex;
     justify-content: center;
     margin-top: 5%;
+    font-family: Verdana, Geneva, sans-serif;
 }
 
 .dashboard {
     position: absolute;
     justify-content: center;
     left: 2%;
-    bottom: 4%;
+    bottom: 2%;
 }
 
 .info {
     font-family: Courier New;
     position: absolute;
     background-color: #ffffffc9;
-    padding: 30px;
+    padding: 25px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 500px;
+    width: 90%;
     position: absolute;
     left: 50%;
     transform: translate(-50%, -0%);
+    opacity: 0.9;
 }
 
 .info .src_code {
@@ -52,13 +54,13 @@ a-scene {
 
 .info .start {
     font-weight: bold;
-    background-color: rgb(180, 180, 180);
+    font-size: 16px;
     padding: 10px;
     margin: 16px 0 0 0;
 }
 
 .info .instructions {
-    background-color: rgb(180, 180, 180);
+    font-size: 16px;
     padding: 30px;
     margin: 24px 0 0 0;
 }
@@ -69,7 +71,7 @@ a-scene {
 }
 
 .dashboard .content strong {
-    color: rgb(255, 0, 0);
+    color: white;
     font-weight: 900;
     font-family: sans-serif;
 }
@@ -101,6 +103,16 @@ a-scene {
     color: yellow;
     font-size: 1.5em;
     text-transform: uppercase;
+}
+
+#level1 {
+    cursor: pointer;
+    border: solid;
+}
+
+#level2 {
+    cursor: pointer;
+    border: solid;
 }
 
 @media (max-width: 600px) {
