@@ -1,7 +1,9 @@
 import getScenerio from './entity_operation';
 import getPosition from './posistion';
+import getScoreInfo from './score';
 
 let scenerio = getScenerio();
+let scoreInfo = getScoreInfo();
 
 //
 // List of alphabets
@@ -60,9 +62,6 @@ let  httpGetAsync = function (theUrl, callback) {
 // Populate Question in the arena
 //
 let insertQuestion = function() {
-    // Set question
-    // document.getElementById('QuesFound').innerHTML = '';
-    // document.getElementById('QuesPending').innerHTML = 'sample';
 
     // Make HTTP request to REST api
     httpGetAsync(queEndpoint, function (res) {
@@ -85,7 +84,21 @@ let insertQuestion = function() {
 let startGame = function() {
     document.getElementById('container').style.zIndex = -1;
     document.getElementsByTagName('a-scene')[0].style.zIndex = 'auto';
+
     populateLetters();
+};
+
+//
+// Go to level 1
+//
+let startlevel1 = function() {
+    document.getElementById('QuesFound').innerHTML = '';
+    document.getElementById('QuesPending').innerHTML = '';
+    document.getElementById('question').style.zIndex = '-2';
+
+    scoreInfo.setScore(0);
+
+    startGame();
 };
 
 //
@@ -94,25 +107,11 @@ let startGame = function() {
 let startlevel2 = function() {
     document.getElementById('question').style.zIndex = 'auto';
     insertQuestion(queEndpoint);
+
     startGame();
 };
 
-//
-// Choose random background image
-//
-let chooseBgImg = function() {
-    let scene = document.getElementById('scene');
-    let sky = document.createElement("a-sky");
-
-    sky.setAttribute('src', 'img/bg/' + (Math.floor(Math.random() * (3)) + 1) + '.jpg');
-    sky.setAttribute('rotation', '0 -130 0');
-
-    scene.appendChild(sky);
-};
-
 window.onload = function() {
-    // Choose random Background image
-    chooseBgImg();
 
     // Temperory function
     let startBtn = document.getElementById('start');
@@ -120,7 +119,7 @@ window.onload = function() {
 
     // Level1
     let level1Btn = document.getElementById('level1');
-    level1Btn.onclick = startGame;
+    level1Btn.onclick = startlevel1;
 
     // Level2
     let level2Btn = document.getElementById('level2');
@@ -133,7 +132,7 @@ window.onload = function() {
         let commands = {
             'letter *let': scenerio.removeLetter,
             'number *num': scenerio.removeNumber,
-            'Level one': startGame,
+            'Level one': startlevel1,
             'Level two': startlevel2,
             'start game': startGame
         };
