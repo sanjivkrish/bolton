@@ -30,6 +30,7 @@ a-scene {
 .info {
     font-family: Courier New;
     position: absolute;
+    background-image: url('../img/bg/home.jpg');
     background-color: #ffffffc9;
     padding: 25px;
     display: flex;
