@@ -85,7 +85,7 @@ scenerio.removeLetter = function(letter) {
             if ((document.getElementById('QuesPending').innerHTML === '') || (QuesPending.length === 0)) {
                 letToBeFound = null;
                 setTimeout(function() {
-                    document.getElementById('level2').click();
+                    // document.getElementById('level2').click();
                 }, 1000)
             }
         }
@@ -136,7 +136,7 @@ scenerio.removeNumber = function(number) {
             if ((document.getElementById('QuesPending').innerHTML === '') || (QuesPending.length === 0)) {
                 letToBeFound = null;
                 setTimeout(function() {
-                    document.getElementById('level2').click();
+                    // document.getElementById('level2').click();
                 }, 1000)
             }
         }

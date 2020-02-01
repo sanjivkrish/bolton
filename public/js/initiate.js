@@ -122,8 +122,8 @@ window.onload = function() {
     level1Btn.onclick = startlevel1;
 
     // Level2
-    let level2Btn = document.getElementById('level2');
-    level2Btn.onclick = startlevel2;
+    // let level2Btn = document.getElementById('level2');
+    // level2Btn.onclick = startlevel2;
 
     //
     // Receive voice input
